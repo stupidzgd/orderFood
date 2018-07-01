@@ -17,13 +17,21 @@
 </template>
 
 <script>
-import header from '@/components/header/header'
+import header from '@/components/header/header';
+import axios from 'axios';
 
 export default {
   components: {
     'v-header': header
+  },
+  created() {
+    const url = '/api/goods';
+    axios.get(url).then((res) => {
+      console.log(123);
+      console.log(res);
+    });
   }
-}
+};
 </script>
 
 <style lang="less">
