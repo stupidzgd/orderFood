@@ -48,7 +48,6 @@ export default {
   height: 40px;
   line-height: 40px;
   overflow: hidden;
-  border: 1px solid #ccc;
   .tab-item {
     flex: 1;
     text-align: center;
