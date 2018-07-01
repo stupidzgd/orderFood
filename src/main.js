@@ -3,7 +3,7 @@
 import Vue from 'vue';
 import App from './App';
 import router from './router/index.js';
-import './common/css/style.css';
+import './common/less/index.less';
 import './common/css/reset.css';
 
 /* eslint-disable no-new */
