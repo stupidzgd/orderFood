@@ -33,20 +33,30 @@
         </li>
       </ul>
     </div>
+    <shopcart :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"></shopcart>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
 import BScroll from 'better-scroll';
+import shopcart from '@/components/shopcart/shopcart';
 
 export default {
+  props: {
+    seller: {
+      type: Object
+    }
+  },
   data() {
     return {
       goods: [],
       scrollY: 0,
       listHeight: []
     };
+  },
+  components: {
+    shopcart
   },
   created() {
     this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee'];
