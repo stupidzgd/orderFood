@@ -43,11 +43,14 @@ export default {
 </script>
 
 <style lang="less">
+@import './common/less/index.less';
+
 .tab {
   display: flex;
   height: 40px;
   line-height: 40px;
   overflow: hidden;
+  .border-1px(rgba(7, 17, 27, 0.1));
   .tab-item {
     flex: 1;
     text-align: center;
