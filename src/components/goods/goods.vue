@@ -27,6 +27,9 @@
                 <div class="price">
                   <span class="now">￥{{food.price}}</span><span class="old" v-show="food.oldPrice">￥{{food.oldPrice}}</span>
                 </div>
+                <div class="cartcontrol-wrapper">
+                  <cartcontrol :food="food"></cartcontrol>
+                </div>
               </div>
             </li>
           </ul>
@@ -41,6 +44,7 @@
 import axios from 'axios';
 import BScroll from 'better-scroll';
 import shopcart from '@/components/shopcart/shopcart';
+import cartcontrol from '@/components/cartcontrol/cartcontrol';
 
 export default {
   props: {
@@ -56,7 +60,8 @@ export default {
     };
   },
   components: {
-    shopcart
+    shopcart,
+    cartcontrol
   },
   created() {
     this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee'];
@@ -199,12 +204,13 @@ export default {
       background-color: #f3f5f7;
     }
     .food-item {
+      position: relative;
       display: flex;
       margin: 18px;
       padding-bottom: 18px;
       .border-1px(rgba(7, 17, 27, 0.1));
       &:last-child {
-        padding-bottom: 0;
+        margin-bottom: 0;
         .border-none();
       }
       .icon {
@@ -249,6 +255,11 @@ export default {
             color: rgb(147, 153, 159);
             text-decoration: line-through;
           }
+        }
+        .cartcontrol-wrapper {
+          position: absolute;
+          right: 0;
+          bottom: 12px;
         }
       }
     }

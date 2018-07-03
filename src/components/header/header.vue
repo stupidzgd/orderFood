@@ -262,6 +262,7 @@ export default {
       min-height: 100%;
       .detail-main {
         margin-top: 64px;
+        padding-bottom: 64px;
         .name {
           line-height: 16px;
           font-size: 16px;
