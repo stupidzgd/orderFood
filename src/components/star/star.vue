@@ -16,7 +16,8 @@ export default {
       type: Number
     },
     score: {
-      type: Number
+      type: Number,
+      default: 0
     }
   },
   computed: {
