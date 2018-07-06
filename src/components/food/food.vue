@@ -41,7 +41,7 @@
                   <span class="name">{{rating.username}}</span>
                   <img :src="rating.avatar" width="12" height="12" class="avatar">
                 </div>
-                <div class="time">{{rating.rateTime | formartDate}}</div>
+                <div class="time">{{rating.rateTime | formatDate}}</div>
                 <p class="text">
                   <span :class="{'icon-thumb_up':rating.rateType===0,'icon-thumb_down':rating.rateType===1}"></span>{{rating.text}}
                 </p>
@@ -60,7 +60,7 @@ import BScroll from 'better-scroll';
 import Vue from 'vue';
 import Split from '@/components/split/split';
 import ratingselect from '@/components/ratingselect/ratingselect';
-import { formatDate } from '@/common/js/data.js';
+import { formatDate } from '@/common/js/date.js';
 
 const ALL = 2;
 
@@ -137,7 +137,7 @@ export default {
     ratingselect
   },
   filters: {
-    formartDate(time) {
+    formatDate(time) {
       let date = new Date(time);
       return formatDate(date, 'yyyy-MM-dd hh:mm');
     }
