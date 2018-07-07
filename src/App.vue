@@ -21,23 +21,29 @@
 <script>
 import header from '@/components/header/header';
 import axios from 'axios';
+import {urlParse} from '@/common/js/util';
 const ERR_OK = 0;
 
 export default {
   data() {
     return {
-      seller: {}
+      seller: {
+        id: (() => {
+          let queryParam = urlParse();
+          return queryParam.id;
+        })()
+      }
     };
   },
   components: {
     'v-header': header
   },
   created() {
-    const url = '/api/seller';
+    const url = '/api/seller?' + this.seller.id;
     axios.get(url).then((response) => {
       response = response.data;
       if (response.errno === ERR_OK) {
-        this.seller = response.data;
+        this.seller = Object.assign({}, this.seller, response.data);
       }
     });
   }

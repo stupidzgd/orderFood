@@ -22,6 +22,10 @@
               <div class="content">{{seller.deliveryTime}}<span class="min">分钟</span></div>
             </li>
           </ul>
+          <div class="favorite" @click="toggleFavorite">
+            <span class="icon-favorite" :class="{'active': favorite}"></span>
+            <span class="text">{{favoriteText}}</span>
+          </div>
         </div>
         <split></split>
         <div class="bulletin">
@@ -63,10 +67,18 @@
 import BScroll from 'better-scroll';
 import star from '@/components/star/star';
 import split from '@/components/split/split';
+import { saveToLocal, loadFromLocal } from '@/common/js/store';
 
 export default {
   props: {
     seller: Object
+  },
+  data() {
+    return {
+      favorite: (() => {
+        return loadFromLocal(this.seller.id, 'favorite', false);
+      })()
+    };
   },
   created() {
     this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee'];
@@ -78,6 +90,13 @@ export default {
     });
   },
   methods: {
+    toggleFavorite(event) {
+      if (!event._constructed) {
+        return;
+      }
+      this.favorite = !this.favorite;
+      saveToLocal(this.seller.id, 'favorite', this.favorite);
+    },
     _initScroll() {
       if (!this.scroll) {
         this.scroll = new BScroll(this.$refs.seller, {
@@ -88,23 +107,30 @@ export default {
       }
     },
     _initPicScroll() {
-      let picWidth = 120;
-      let margin = 6;
-      let width = (picWidth + margin) * this.seller.pics.length - margin;
-      this.$refs.picList.style.width = width + 'px';
-      this.$nextTick(() => {
-        if (!this.picScroll) {
-          this.picScroll = new BScroll(this.$refs.picWrapper, {
-            scrollX: true,
-            eventPassthrough: 'vertical'
-          });
-        } else {
-          this.picScroll = new BScroll(this.$refs.picWrapper, {
-            scrollX: true,
-            eventPassthrough: 'vertical'
-          });
-        }
-      });
+      if (this.seller.pics) {
+        let picWidth = 120;
+        let margin = 6;
+        let width = (picWidth + margin) * this.seller.pics.length - margin;
+        this.$refs.picList.style.width = width + 'px';
+        this.$nextTick(() => {
+          if (!this.picScroll) {
+            this.picScroll = new BScroll(this.$refs.picWrapper, {
+              scrollX: true,
+              eventPassthrough: 'vertical'
+            });
+          } else {
+            this.picScroll = new BScroll(this.$refs.picWrapper, {
+              scrollX: true,
+              eventPassthrough: 'vertical'
+            });
+          }
+        });
+      }
+    }
+  },
+  computed: {
+    favoriteText() {
+      return this.favorite ? '已收藏' : '收藏';
     }
   },
   watch: {
@@ -186,6 +212,29 @@ export default {
             font-size: 10px;
           }
         }
+      }
+    }
+    .favorite {
+      position: absolute;
+      width: 50px;
+      right: 11px;
+      top: 18px;
+      text-align: center;
+      .icon-favorite {
+        display: block;
+        margin-bottom: 4px;
+        font-size: 24px;
+        line-height: 24px;
+        color: #d4d6d9;
+        &.active {
+          color: rgb(240, 20, 20);
+        }
+      }
+      .text {
+        display: block;
+        font-size: 10px;
+        color: rgb(77, 85, 93);
+        line-height: 10px;
       }
     }
   }
