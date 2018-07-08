@@ -87,7 +87,7 @@ export default {
   },
   created() {
     const url = debug ? '/api/ratings' : 'http://154.8.140.180/sell/api/ratings';
-    axios.get('/api/ratings').then((response) => {
+    axios.get(url).then((response) => {
       response = response.data;
       if (response.errno === ERR_OK) {
         this.ratings = response.data;

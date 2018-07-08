@@ -43,8 +43,7 @@ export default {
   },
   created() {
     const url = debug ? '/api/seller' : 'http://154.8.140.180/sell/api/seller';
-    const url = url + this.seller.id;
-    axios.get(url).then((response) => {
+    axios.get(url + '?id=' + this.seller.id).then((response) => {
       response = response.data;
       if (response.errno === ERR_OK) {
         // 把id属性合并到ajax请求回来的seller对象中
