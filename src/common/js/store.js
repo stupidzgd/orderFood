@@ -1,3 +1,12 @@
+// localStorage存储格式形如:
+// localStorage: {
+//   __seller__: {
+//     "id" : {
+//       key: value
+//     }
+//   }
+// }
+
 export function saveToLocal(id, key, value) {
   let seller = window.localStorage.__seller__;
   if (!seller) {

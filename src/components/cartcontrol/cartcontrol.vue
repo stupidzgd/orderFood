@@ -24,11 +24,13 @@ export default {
       if (!event._constructed) {
         return;
       }
+      // food本身没有count，设置count属性
       if (!this.food.count) {
         Vue.set(this.food, 'count', 1);
       } else {
         this.food.count++;
       }
+      // 把按钮的位置派发给父级，用于定位下落起点
       this.$emit('add', event.target);
     },
     decreaseCart(event) {

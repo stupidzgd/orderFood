@@ -59,7 +59,9 @@ export default {
   data() {
     return {
       goods: [],
+      // 右侧商品栏实时派发出来的y轴滚动距离
       scrollY: 0,
+      // 每个类型的商品高度数组，scrollY和数组对别，判断属于哪个区间，从而联动左侧菜单和右侧商品
       listHeight: [],
       selectedFood: {}
     };
@@ -89,12 +91,14 @@ export default {
       for (let i = 0; i < this.listHeight.length; i++) {
         let height1 = this.listHeight[i];
         let height2 = this.listHeight[i + 1];
+        // 判断当前Y值所处的区间
         if (!height2 || (this.scrollY >= height1 && this.scrollY < height2)) {
           this._followScroll(i);
           return i;
         }
       }
     },
+    // 保存被加入到购物车的商品
     selectFoods() {
       let foods = [];
       this.goods.forEach((good) => {
@@ -109,10 +113,12 @@ export default {
   },
   methods: {
     selectMenu(index, event) {
+      // event._constructed事件带有这个属性表明是滑动组件触发的click事件，如果不判读click会触发两次，原生一次，better-scroll一次
       if (!event._constructed) {
         return;
       }
       let el = this.$refs.foodList[index];
+      // 滚动到菜单对应的商品
       this.foodsScroll.scrollToElement(el, 300, 0, 0);
     },
     selectFood(food) {
@@ -125,11 +131,13 @@ export default {
     _drop(target) {
       this.$refs.shopcart.drop(target);
     },
+    // 初始化better-scroll组件，监听右侧y轴滚动位置
     _initScroll() {
       this.menuScroll = new BScroll(this.$refs.menuWrapper, {
         click: true
       });
       this.foodsScroll = new BScroll(this.$refs.foodsWrapper, {
+        // 派发click事件，probeType 3派发滚动位置，惯性滚动依然派发
         click: true,
         probeType: 3
       });
@@ -137,6 +145,7 @@ export default {
         this.scrollY = Math.abs(Math.round(pos.y));
       });
     },
+    // 保存各类商品在页面的高度
     _calculateHeight() {
       var foodList = this.$refs.foodList;
       let height = 0;
@@ -147,6 +156,7 @@ export default {
         this.listHeight.push(height);
       }
     },
+    // menu菜单滚动，菜单滚动是跟随右边商品栏滚动触发的
     _followScroll(index) {
       let menuList = this.$refs.menuList;
       let el = menuList[index];

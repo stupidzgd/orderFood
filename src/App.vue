@@ -12,6 +12,7 @@
         <router-link to="/seller">商家</router-link>
       </div>
     </div>
+    <!-- 缓存路由，避免每次切换路由都重新加载 -->
     <keep-alive>
       <router-view :seller="seller"/>
     </keep-alive>
@@ -29,6 +30,7 @@ export default {
     return {
       seller: {
         id: (() => {
+          // 解析查询字符串的id值
           let queryParam = urlParse();
           return queryParam.id;
         })()
@@ -43,6 +45,7 @@ export default {
     axios.get(url).then((response) => {
       response = response.data;
       if (response.errno === ERR_OK) {
+        // 把id属性合并到ajax请求回来的seller对象中
         this.seller = Object.assign({}, this.seller, response.data);
       }
     });

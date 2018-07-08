@@ -155,11 +155,13 @@ export default {
     addFood(target) {
       this.drop(target);
     },
+    // 触发小球下落动画
     drop(target) {
       for (let i = 0; i < this.balls.length; i++) {
         let ball = this.balls[i];
         if (!ball.show) {
           ball.show = true;
+          // 把下落的起始点挂到小球属性上
           ball.el = target;
           this.dropBalls.push(ball);
           return;
@@ -168,6 +170,7 @@ export default {
     },
     beforeDrop(el) {
       let count = this.balls.length;
+      // 遍历小球，初始化小球位置到event.target，就是点击添加食品的位置
       while (count--) {
         let ball = this.balls[count];
         if (ball.show) {
@@ -184,6 +187,7 @@ export default {
       }
     },
     dropping(el, done) {
+      // 手动触发重排,确保小球被正常渲染到初始位置
       /* eslint-disable no-unused-vars */
       let reflow = el.offsetHeight;
       this.$nextTick(() => {

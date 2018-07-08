@@ -57,12 +57,14 @@ export default {
     }
   },
   methods: {
+    // 是否只显示有内容评论，派发给父级修改onlyContent
     toggleContent() {
       if (!event._constructed) {
         return;
       }
       this.$emit('toggle');
     },
+    // 评论类别，派发给父级
     select(type, event) {
       if (!event._constructed) {
         return;

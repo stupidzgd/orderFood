@@ -73,6 +73,7 @@ export default {
   data() {
     return {
       showFlag: false,
+      // 下面三个属性都是用于评论切换组件的参数
       selectType: ALL,
       onlyContent: true,
       desc: {
@@ -83,6 +84,7 @@ export default {
     };
   },
   methods: {
+    // 暴露给goods组件调用show
     show() {
       this.showFlag = true;
       this.$nextTick(() => {
@@ -120,6 +122,7 @@ export default {
         this.scroll.refresh();
       });
     },
+    // 判断该条评论是否显示
     needShow(type, text) {
       if (this.onlyContent && !text) {
         return false;

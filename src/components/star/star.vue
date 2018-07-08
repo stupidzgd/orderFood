@@ -5,6 +5,7 @@
 </template>
 
 <script>
+// 定义star组件基本属性星星个数，类名
 const LENGTH = 5;
 const CLS_ON = 'on';
 const CLS_OFF = 'off';
@@ -12,6 +13,7 @@ const CLS_HALF = 'half';
 
 export default {
   props: {
+    // 接收参数分数、尺寸
     size: {
       type: Number
     },
@@ -24,6 +26,7 @@ export default {
     starType() {
       return 'star-' + this.size;
     },
+    // 根据分数转换成对应的class数组
     itemClasses() {
       var ret = [];
       var score = Math.floor(this.score * 2) / 2;
