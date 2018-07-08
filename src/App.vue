@@ -24,6 +24,7 @@ import header from '@/components/header/header';
 import axios from 'axios';
 import {urlParse} from '@/common/js/util';
 const ERR_OK = 0;
+const debug = process.env.NODE_ENV !== 'production';
 
 export default {
   data() {
@@ -41,7 +42,8 @@ export default {
     'v-header': header
   },
   created() {
-    const url = '/api/seller?' + this.seller.id;
+    const url = debug ? '/api/seller' : 'http://154.8.140.180/sell/api/seller';
+    const url = url + this.seller.id;
     axios.get(url).then((response) => {
       response = response.data;
       if (response.errno === ERR_OK) {

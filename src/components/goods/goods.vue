@@ -49,6 +49,7 @@ import BScroll from 'better-scroll';
 import shopcart from '@/components/shopcart/shopcart';
 import cartcontrol from '@/components/cartcontrol/cartcontrol';
 import food from '@/components/food/food';
+const debug = process.env.NODE_ENV !== 'production';
 
 export default {
   props: {
@@ -74,7 +75,7 @@ export default {
   created() {
     this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee'];
 
-    const url = '/api/goods';
+    const url = debug ? '/api/goods' : 'http://154.8.140.180/sell/api/goods';
     axios.get(url).then((response) => {
       response = response.data;
       if (response.errno === 0) {

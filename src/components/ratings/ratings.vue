@@ -62,6 +62,7 @@ import { formatDate } from '@/common/js/date.js';
 
 let ALL = 2;
 let ERR_OK = 0;
+const debug = process.env.NODE_ENV !== 'production';
 
 export default {
   props: {
@@ -85,6 +86,7 @@ export default {
     ratingselect
   },
   created() {
+    const url = debug ? '/api/ratings' : 'http://154.8.140.180/sell/api/ratings';
     axios.get('/api/ratings').then((response) => {
       response = response.data;
       if (response.errno === ERR_OK) {
