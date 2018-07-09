@@ -42,7 +42,8 @@ export default {
     'v-header': header
   },
   created() {
-    const url = debug ? '/api/seller' : 'http://154.8.140.180/sell/api/seller';
+    const url = debug ? '/api/seller' : 'http://zgd666.cc/sell/api/seller';
+    // const url = debug ? '/api/seller' : 'http://172.26.252.15:9000/api/seller';
     axios.get(url + '?id=' + this.seller.id).then((response) => {
       response = response.data;
       if (response.errno === ERR_OK) {

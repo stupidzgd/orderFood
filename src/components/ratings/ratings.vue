@@ -86,7 +86,8 @@ export default {
     ratingselect
   },
   created() {
-    const url = debug ? '/api/ratings' : 'http://154.8.140.180/sell/api/ratings';
+    const url = debug ? '/api/goods' : 'http://zgd666.cc/sell/api/ratings';
+    // const url = debug ? '/api/ratings' : 'http://172.26.252.15:9000/api/ratings';
     axios.get(url).then((response) => {
       response = response.data;
       if (response.errno === ERR_OK) {
