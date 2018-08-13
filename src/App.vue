@@ -42,7 +42,7 @@ export default {
     'v-header': header
   },
   created() {
-    const url = debug ? '/api/seller' : 'http://zgd666.cc/sell/api/seller';
+    const url = debug ? '/api/seller' : 'http://stupidzgd.com/sell/api/seller';
     // const url = debug ? '/api/seller' : 'http://127.0.0.1:9000/api/seller';
     axios.get(url + '?id=' + this.seller.id).then((response) => {
       response = response.data;

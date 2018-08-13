@@ -75,7 +75,7 @@ export default {
   created() {
     this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee'];
 
-    const url = debug ? '/api/goods' : 'http://zgd666.cc/sell/api/goods';
+    const url = debug ? '/api/goods' : 'http://stupidzgd.com/sell/api/goods';
     // const url = debug ? '/api/goods' : 'http://127.0.0.1:9000/api/goods';
 
     axios.get(url).then((response) => {
